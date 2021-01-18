@@ -1,0 +1,73 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+    <div class="row">
+      <div class="card">
+        <div class="col-md-12">
+       
+            <form [formGroup]="form" (submit)="registroSubmit()">
+              <div formGroupName="endereco">
+                <div class="row">
+                 
+                 <div class="col"> 
+                <div class="md-form">
+                   <input  type="text" class="form-control" formControlName="cep" id="cep"
+                   (blur)="consultaCEP($event.target.value)" placeholder="CEP">
+                   <app-error-msg [control]="form.get('endereco.cep')" label="CEP"></app-error-msg>
+                 
+                 </div>
+                 </div>
+                 <div class="col"> 
+                <div class="md-form" >
+                   <input  type="text" class="form-control" formControlName="estado" name="estado" placeholder="Estado" required>
+                 </div>
+                </div>
+                <div class="col"> 
+                 <div class="md-form" >
+                    <input  type="text" class="form-control" formControlName="complemento" name="complemento" placeholder="complemento">
+                  </div>
+                 </div>
+                </div>
+                <br/>
+                <div class="row">
+                 <div class="col"> 
+                   <div class="md-form" >
+                      <input  type="text" class="form-control" formControlName="rua" name="rua" placeholder="rua">
+                    </div>
+                   </div>
+                   <div class="col"> 
+                     <div class="md-form" >
+                        <input  type="text" class="form-control" formControlName="bairro" name="bairro" placeholder="bairro" required>
+                      </div>
+                     </div>
+                     <div class="col"> 
+                       <div class="md-form" >
+                          <input  type="text" class="form-control" formControlName="cidade" name="cidade" placeholder="cidade" required>
+                        </div>
+                       </div>
+                       <div class="col"> 
+                         <div class="md-form" >
+                            <input  type="text" class="form-control" formControlName="numero" name="numero" placeholder="Número">
+                          </div>
+                         </div>
+                </div>
+               </div>
+               <button class="btn btn-primary btn-round"  [routerLink]="['/aluno/perfil-aluno', alunoId]"   >Voltar para página do Aluno</button>
+               <button class="btn btn-primary btn-round"  [disabled]="!form.valid">Atualizar</button>
+            </form>
+            <div class="col"> 
+              <div class="md-form" >
+                 <h4>Endereço atual</h4><br>
+                 <p>Cep: {{aluno?.endereco[0]?.cep}} </p>
+                 <p>Rua/Av: {{aluno?.endereco[0]?.rua}} </p>
+                 <p>Bairro: {{aluno?.endereco[0]?.bairro}} </p>
+                 <p>Cidade: {{aluno?.endereco[0]?.cidade}} </p>
+                 <p>Estado: {{aluno?.endereco[0]?.estado}} </p>
+                 <p>Número: {{aluno?.endereco[0]?.numero}} </p>
+                 <p>Complemento: {{aluno?.endereco[0]?.complemento}} </p>
+               </div>
+              </div>
+            </div>
+        </div>
+        </div>
+

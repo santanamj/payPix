@@ -1,0 +1,34 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <h2> Criar Observação: {{aluno?.nome}}</h2>
+                <div class="card-body">
+                  
+                    <form [formGroup]="form" (submit)="registroSubmit()">
+                        <div class="row">
+                        
+                            <div class="col-sm">
+                                <br />
+                                <div class="md-form">
+                                    <textarea class="form-control" type="text" name="observacao" formControlName="observacao"
+                                        placeholder="Observação"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <br />
+                            </div>
+                        </div>
+                        <button type="submit" name="button" class="btn btn-secundary btn-round"
+                            [routerLink]="['/aluno/perfil-aluno', this.aluno._id]">Voltar para
+                            página do aluno</button>
+                        <button type="submit" name="button" class="btn btn-primary btn-round" 
+                            [disabled]="!form.valid">Criar Observação</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

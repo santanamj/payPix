@@ -1,0 +1,40 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+        <div class="card-body">
+  
+    <h4 class="card-title">Autenticação</h4>
+    <div class="card-header"></div>
+          <div class="col-6 card-body ">
+            <form [formGroup]="form" (submit)="onLoginSubmit()">
+                  <div class="form-group" [ngClass]="{'focused':focus===true}">
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
+                      </div>
+                      <input class="form-control" placeholder="Nome do usuário" type="text" formControlName="username" (focus)="focus=true" (blur)="focus=false">
+                    </div>
+                  </div>              
+                  <div class="form-group" [ngClass]="{'focused':focus2===true}">
+                    <div class="input-group input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></span>
+                      </div>
+                      <input class="form-control" placeholder="Password" formControlName="password" type="password" (focus)="focus2=true" (blur)="focus2=false">
+                    </div>
+                  </div>               
+                 
+                  <div class="text-center">
+                    <button class="btn btn-primary mt-4">Entrar</button>
+                  </div>
+                </form>       
+      </div>      
+    </div> 
+    <div class="col-md-4"></div>
+  </div>
+</div>
+</div>
+</div>

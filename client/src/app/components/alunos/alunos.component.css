@@ -1,0 +1,12 @@
+.card-title{
+    width: 200px;
+    display: inline-block;
+}
+.criar-aluno{
+    float: right;
+}
+table.table td {
+    padding-top: 1.1rem;
+    padding-bottom: 1rem;
+    cursor: pointer;
+}

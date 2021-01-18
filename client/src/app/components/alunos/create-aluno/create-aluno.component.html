@@ -1,0 +1,225 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+        <div class="card-body">
+  
+    <h4 class="card-title">Cadastro de Aluno</h4>
+    <div class="card-header"></div>
+    <form [formGroup]="form" (submit)="registroSubmit()">
+     
+        <div class="row">
+    
+          <div class="col-md-4">
+      <div class="form-group" >
+        <input  type="text" class="form-control" formControlName="nome" name="nome" placeholder="Nome">
+      </div>
+    </div>
+    <div class="col-md-4">  
+      <div class="form-group">
+        <input  type="text" class="form-control" formControlName="email" name="email" placeholder="E-mail">
+      </div>
+    </div>
+    <div class="col-md-4">  
+      <div class="form-group">
+        <input  type="text" [textMask]="{mask: mask}" class="form-control" formControlName="telefone" name="telefone" placeholder="Telefone">
+      </div></div>
+        </div>
+        <div class="row">
+      <div class="col-md-3"> <br/>
+         
+      <div class="form-group">
+        <input  type="text" [textMask]="{mask: maskcel}" class="form-control" formControlName="celular"  placeholder="Celular">
+      </div></div>
+      <div class="col-md-3"> <br/>
+      <div class="form-group">
+        <input  type="text" [textMask]="{mask: maskcpf}" class="form-control" formControlName="CPF"placeholder="CPF">
+      </div>
+        </div>
+       
+        <div class="col-md-3">  <br/>
+        <div class="form-group">
+          <input  type="text" class="form-control" formControlName="RG" name="rg" placeholder="Número de Identidade">
+        </div></div>
+               <div class="col-md-3"> 
+                    <label>Serie</label>
+                    <div class="md-form">
+                      
+                      <select class="browser-default custom-select"  formControlName="serie"  >
+                        <option value="" disabled selected>Serie</option>                       
+                        <option value="Grupo 1">Grupo 1</option>
+                        <option value="Grupo 2">Grupo 2</option>
+                        <option value="Grupo 3">Grupo 3</option>
+                        <option value="Grupo 4">Grupo 4</option>
+                        <option value="outro">Alfabetização</option>
+                        <option value="1º série">1º série</option>
+                        <option value="2º série">2º série</option>
+                        <option value="3º série">3º série</option>
+                        <option value="4º série">4º série</option>
+                      </select>
+                    </div>
+                    </div>
+      </div>
+       
+     <br/>
+    
+      <div class="row">
+      <div class="col-md-4">  
+      <mat-form-field color="accent" appearance="fill">   
+        <mat-label>Data de nascimento</mat-label>          
+        <input matInput [matDatepicker]="picker" formControlName="datnsc">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+      <div class="col-md-4">  
+       <mat-form-field color="accent" appearance="fill">   
+        <mat-label>Data de aquisição</mat-label>          
+        <input matInput [matDatepicker]="picker2" formControlName="datamatricula">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+      <div class="col-md-4">  
+     <mat-form-field color="accent" appearance="fill">   
+        <mat-label>primeiro Vencimento</mat-label>          
+        <input matInput [matDatepicker]="picker3" formControlName="privenc">
+        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">  
+        <div class="form-group">
+          <select class="browser-default custom-select" formControlName="sexo" name="sexo">
+            <option value="" disabled selected>Sexo</option>
+            <option value="masculino">Masculino</option>
+            <option value="feminimo">Feminino</option>           
+          </select>
+        </div></div>
+     
+      <div class="col-md-4">  
+      <div class="form-group">
+        <select class="browser-default custom-select" formControlName="status" name="status" >
+          <option value="" disabled selected>Status</option>
+          <option value="Ativo">Matriculado</option>
+          <option value="Pendência">Pendência</option>
+          <option value="Inativo">Inativo</option>
+          <option value="Expulso">expulso</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div></div>
+      <div class="col-md-4">  
+        <div class="form-group">
+          <textarea class="md-textarea form-control"  formControlName="observacao" name="observacao" placeholder="Oberservação"></textarea>
+        </div></div>
+    </div>
+      <div class="row">
+   
+    </div>
+    <div formGroupName="endereco">
+      <h3>Endereço</h3>
+      <div class="row">
+       
+       <div class="col-md-6"> 
+      <div class="form-group">
+         <input  type="text" class="form-control" formControlName="cep" id="cep"
+         (blur)="consultaCEP($event.target.value)" placeholder="CEP">
+         <app-error-msg [control]="form.get('endereco.cep')" label="CEP"></app-error-msg>
+       
+       </div>
+       </div>
+       <div class="col-md-6"> 
+      <div class="form-group" >
+         <input  type="text" class="form-control" formControlName="estado" name="estado" placeholder="Estado">
+       </div>
+      </div>
+      <div class="col-md-6"> 
+       <div class="form-group" >
+          <input  type="text" class="form-control" formControlName="complemento" name="complemento" placeholder="complemento">
+        </div>
+       </div>
+      </div>
+      <div class="row">
+       <div class="col-md-6"> 
+         <div class="form-group" >
+            <input  type="text" class="form-control" formControlName="rua" name="rua" placeholder="rua">
+          </div>
+         </div>
+         <div class="col-md-6"> 
+           <div class="form-group" >
+              <input  type="text" class="form-control" formControlName="bairro" name="bairro" placeholder="bairro">
+            </div>
+           </div>
+           <div class="col-md-6"> 
+             <div class="form-group" >
+                <input  type="text" class="form-control" formControlName="cidade" name="cidade" placeholder="cidade">
+              </div>
+             </div>
+             <div class="col-md-6"> 
+               <div class="form-group" >
+                  <input  type="text" class="form-control" formControlName="numero" name="numero" placeholder="Número">
+                </div>
+               </div>
+      </div>
+     </div>
+     <br/>
+
+     <div formGroupName="responsavel">
+       <h3>Nome do responsável</h3>
+       <div class="row">
+         <div class="col-md-4">
+           <div class="form-group">
+             <input type="text" class="form-control" formControlName="nome" placeholder="Nome do responsável">
+           </div>
+         </div>
+         <div class="col-md-4">  
+          <div class="form-group">
+            <input  type="text" [textMask]="{mask: mask}" class="form-control" formControlName="telefoneResponsavel" name="telefone responsável" placeholder="Telefone">
+          </div></div>
+           
+           
+          <div class="col-md-4"> 
+             
+          <div class="form-group">
+            <input  type="text" [textMask]="{mask: maskcel}" class="form-control" formControlName="celularResponsavel"  placeholder="Celular responsável">
+          </div></div>
+        </div>
+          <div class="row">
+          <div class="col-md-4"> 
+          <div class="form-group">
+            <input  type="text" [textMask]="{mask: maskcpf}" class="form-control" formControlName="cpfResponsavel" placeholder="CPF responsável">
+          </div>
+            </div>
+            <div class="col-md-4">  
+              <div class="form-group">
+                <select class="browser-default custom-select" formControlName="parentesco" name="parentesco">
+                  <option value="" disabled selected>Parentesco</option>
+                  <option value="Pai">Pai</option>
+                  <option value="Mãe">Mãe</option>    
+                  <option value="Padrastro">Padrastro</option>
+                  <option value="Madrasta">Madrasta</option>              
+                  <option value="Avô">Avô</option>
+                  <option value="Avó">Avó</option>
+                  <option value="Tio">Tio</option>
+                  <option value="Tia">Tia</option>
+                  <option value="Primo">Primo</option>
+                  <option value="Prima">Prima</option>
+                </select>
+              </div></div>
+       </div>
+
+     </div>
+    
+    
+    <button type="submit"  class="btn btn-secundary btn-round">Criar Aluno</button>
+    </form>
+
+    </div>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,59 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">    
+    <div class="col-md-12">
+      <div class="card card-plain">
+    
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Alunos</h4>
+          <div class="criar-aluno">
+            <button class="btn btn-primary btn-round" 
+            [routerLink]="['/aluno/criar-aluno']">Cadastrar aluno</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <th scope="col"> <input  class="form-control form-control-sm"   (keyup)="searchTerm$.next($event.target.value)"
+                  placeholder="Buscar Aluno" ></th>
+                <th scope="col"> <input  class="form-control form-control-sm"
+                  (keyup)="searchTitulo$.next($event.target.value)" placeholder="Buscar por matrícula" ></th>  
+                 
+                </thead>
+              <thead class=" text-primary">
+                <th>
+                  Nome do aluno
+                </th>
+                <th>
+                  Nome do resposável
+                </th>
+                <th>
+                  Status
+                </th>
+                <th class="text-right">
+                  Matrícula
+                </th>
+              </thead>
+              <tbody *ngIf="alunos">
+                <tr *ngFor="let aluno of alunos" [routerLink]="['/aluno/perfil-aluno/', aluno?._id] ">
+                  <td  scope="row">{{aluno.nome}}</td>
+                  <td scope="row" *ngFor="let item of aluno.responsavel" >{{item.nome}}</td>
+                 
+                  <td>{{aluno.status}}</td>
+                  <td  >{{aluno.matricula}}</td>
+                   
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

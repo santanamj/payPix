@@ -1,0 +1,69 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" *ngIf="aluno">
+                <form [formGroup]="form" (submit)="registroSubmit()">
+                    <div formGroupName="responsavel">
+                        <h3>Nome do responsável</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" formControlName="nome"
+                                    [(ngModel)]="responsavel.nome"          placeholder="Nome do responsável">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="text" [textMask]="{mask: mask}" class="form-control"
+                                    [(ngModel)]="responsavel.telefoneResponsavel" formControlName="telefoneResponsavel" name="telefone responsável"
+                                        placeholder="Telefone">
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <input type="text" [textMask]="{mask: maskcel}" class="form-control"
+                                    [(ngModel)]="responsavel.celularResponsavel" formControlName="celularResponsavel" placeholder="Celular responsável">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="text" [textMask]="{mask: maskcpf}" class="form-control"
+                                    [(ngModel)]="responsavel.cpfResponsavel" formControlName="cpfResponsavel" placeholder="CPF responsável">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select class="browser-default custom-select" formControlName="parentesco"
+                                    [(ngModel)]="responsavel.parentesco"  cpfResponsavel name="parentesco">
+                                        <option value="" disabled selected>Parentesco</option>
+                                        <option [value]="responsavel.parentesco">{{responsavel.parentesco}}</option>
+                                        <option value="Pai">Pai</option>
+                                        <option value="Mãe">Mãe</option>
+                                        <option value="Padrastro">Padrastro</option>
+                                        <option value="Madrasta">Madrasta</option>
+                                        <option value="Avô">Avô</option>
+                                        <option value="Avó">Avó</option>
+                                        <option value="Tio">Tio</option>
+                                        <option value="Tia">Tia</option>
+                                        <option value="Primo">Primo</option>
+                                        <option value="Prima">Prima</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-round" [routerLink]="['/aluno/perfil-aluno', aluno._id]">Voltar
+                        para página do Aluno</button>
+                    <button class="btn btn-primary btn-round">Atualizar Responsável</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

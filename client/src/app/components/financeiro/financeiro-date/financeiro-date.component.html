@@ -1,0 +1,75 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+    <div class="row">   
+        <div class="col-md-12">
+          <div class="card ">
+            <div class="card-header ">
+              <h2 class="card-title">Relatório por data</h2>          
+            </div>
+            <div class="card-body " >
+        
+                <form [formGroup]="dataForm" (submit)="submit()">
+                 <div class="row">
+                    <div class="col-md-4">  
+                        <mat-form-field color="accent" appearance="fill">   
+                         <mat-label>Data de aquisição</mat-label>          
+                         <input matInput [matDatepicker]="picker2" formControlName="dataInit">
+                         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                         <mat-datepicker #picker2></mat-datepicker>
+                       </mat-form-field>
+                     </div>
+                       <div class="col-md-4">  
+                      <mat-form-field color="accent" appearance="fill">   
+                         <mat-label>primeiro Vencimento</mat-label>          
+                         <input matInput [matDatepicker]="picker3" formControlName="dataEnd">
+                         <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                         <mat-datepicker #picker3></mat-datepicker>
+                       </mat-form-field>
+                     </div>
+                 </div>
+                    <button [disabled]="!dataForm.valid" color="primary" (click)="submit()" class="btn btn-outline-secundary">Carregar relatório</button>
+                  </form>        
+        </div>  
+    </div> 
+    <div id="htmlData" #htmlData > 
+        <div class="print">
+        <h2 class="card-title">Relatório por data</h2>    
+        <div class="list-group printData">
+        
+    
+    
+            <table class="table table-bordered">
+                <tr class="table-primary">
+                  <th>Data de pagamento</th>
+                  <th>Tipo de pagamento</th>
+                  <th>Valor</th>
+                  <th>Data de vencimento</th>
+                  <th>Observações</th>
+              
+                </tr>
+                <tr *ngFor="let item of financeirosData">
+                  <th>{{item.pgtomen | date: 'dd/MM/yyyy'}}</th>
+                  <td>{{item.tipo}}</td>
+                  <td  >{{item.valor.original}}</td>
+                  <td>{{item.vctmen | date: 'dd/MM/yyyy'}}</td>
+                  <td> {{item.observacao}}</td>
+                
+                </tr>
+                <tr class="table-primary">                
+                    <th>Totais</th>
+                    <th></th>
+                    <th>{{valorFinanceiro | currency:'BRL':true}}</th>
+                    <!-- <th>{{cartaoValor | currency:'BRL':true}}</th>
+                    <th>{{valoresOutro | currency:'BRL':true}}</th> -->
+                  
+                  </tr>
+              </table>
+    
+        </div>
+    </div> 
+    </div>
+    <button class="btn btn-danger btn-block" (click)="downloadPDF()">Download PDF</button>
+     
+    </div>
+</div>

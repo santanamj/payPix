@@ -1,0 +1,326 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="title">Dados do aluno</h4>
+        </div>
+        <div class="card-body">
+        
+            <div class="row">
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Nome do aluno</label>
+                  <p>{{aluno?.nome}}</p>
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <div class="form-group">
+                  <label>Serie</label>
+                 <p>{{aluno?.serie}}</p>
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label for="email">Idade</label>
+                  <p>{{dataNascimento}} anos</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 pr-1">
+                <div class="form-group">
+                  <label>Cadastrado em:</label>
+                  <p>{{aluno?.createdAt | date: 'dd/MM/yyyy' }}</p>
+                </div>
+              </div>
+              <div class="col-md-3 pl-1">
+                <div class="form-group">
+                  <label>Cadastrado da matrícula:</label>
+                  <p>{{aluno?.datamatricula | date: 'dd/MM/yyyy' }}</p>
+                </div>
+              </div>
+              <div class="col-md-3 pl-1">
+                <div class="form-group">
+                  <label>Cadastrado da matrícula:</label>
+                  <p>{{aluno?.datnsc | date: 'dd/MM/yyyy' }}</p>
+                </div>
+              </div>
+              <div class="col-md-3 pl-1">
+                <div class="form-group">
+                  <label>Sexo:</label>
+                  <p>{{aluno?.sexo}}</p>
+                </div>
+              </div>
+            </div>
+          
+            <div class="row">
+              <div class="col-md-3 pl-1">
+                <div class="form-group">
+                  <label>Status:</label>
+                  <p>{{aluno?.status}}</p>
+                </div>
+              </div>
+              <div class="col-md-3 pr-1">
+                <div class="form-group">
+                  <label>Telefone:</label>
+                  <p>{{aluno?.telefone}}</p>
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <div class="form-group">
+                  <label>Cadastrdo da matrícula:</label>
+                  <p>{{aluno?.celular}}</p>
+                </div>
+              </div>
+              <div class="col-md-3 pl-1">
+                <div class="form-group">
+                  <label>E-mail:</label>
+                  <p>{{aluno?.email}}</p>
+                </div>
+              </div>
+            
+            </div>
+            <hr/>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <h4>Dados do responsável</h4>                
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12" *ngFor="let responsavel of responsaveList"> 
+            <div class="row" >
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Nome do aluno</label>
+                  <p>{{responsavel?.nome}}</p>
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <div class="form-group">
+                  <label>CPF</label>
+                 <p>{{responsavel?.cpfResponsavel}}</p>
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label for="email">Parentesco</label>
+                  <p>{{responsavel.parentesco}}</p>
+                </div>
+              </div>            
+            </div>
+            <div class="row">
+                         
+              <div class="col-md-3 pr-1">
+                <div class="form-group">
+                  <label>Telefone:</label>
+                  <p>{{responsavel?.celularResponsavel}}</p>
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <div class="form-group">
+                  <label>Cadastrdo da matrícula:</label>
+                  <p>{{responsavel?.telefoneResponsavel}}</p>
+                </div>
+              </div>
+              <div class="col-md-3 pl-1">
+                <div class="form-group">
+                  <label>E-mail:</label>
+                  <p>{{responsavel?.emailResponsavel}}</p>
+                </div>
+              </div>
+            
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col">
+                <div class="criar-aluno">
+                  <button class="btn btn-primary btn-round" 
+                  [routerLink]="['/aluno/edit-aluno/',  aluno?._id]">Editar Aluno</button>
+                </div>
+              </div>
+              <div class="col">
+                <div class="criar-aluno">
+                  <button class="btn btn-primary btn-round" 
+                  [routerLink]="['/aluno/endereco-aluno/',  aluno?._id]">Editar endereco</button>
+                </div>
+              </div>
+              <div class="col">
+                <div class="criar-aluno">
+                  <button class="btn btn-primary btn-round" 
+                  [routerLink]="['/aluno/responsavel-aluno/',  aluno?._id]">Editar Responśavel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+     
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="image">
+          <img src="../assets/img/bg5.jpg" alt="...">
+        </div>
+        <div class="card-body img-text">
+            <div  *ngIf="aluno?.avatarAluno[0]?.secure_url; else notShow">
+              <img class="img-aluno" [src]="aluno?.avatarAluno[0]?.secure_url" class="center">
+              </div>
+              <ng-template #notShow>
+               
+                    <div class="author">
+                        <a href="#">
+                          <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
+                        
+                        </a>
+                      
+                      </div>
+              
+              </ng-template>
+              <p class="description">
+                {{aluno?.nome}}
+            </p>
+            <p class="description text-center">
+              Idade: {{dataNascimento}} anos
+               <br> Série: {{aluno?.serie}}     
+               <br/>
+               Nº Matricula: {{aluno?.matricula}}      
+             </p>
+              <form [formGroup]="form" name="createNewImg()" (ngSubmit)="OnSubmit()">            
+                <div class="upload-btn-wrapper">
+                  <button class="btn-img">Upload a file</button>
+                  <input id="files" #myInput name="files" type="file" #files (change)="onFileChange($event)" #fileInput>
+                </div>
+              <!-- <button mat-raised-button color="accent"  type="submit" [disabled]="!form.valid" >Submit</button> -->
+             </form>
+        
+        </div>    
+         
+      </div>
+      <div class="row">
+      <div class="col-6">
+        
+        <button class="btn btn-primary btn-round " 
+        [routerLink]="['/mensalidade/',  aluno?._id]">Criar mensalidade</button>
+    
+    </div> 
+    <div class="col-6">
+        
+      <button class="btn btn-primary btn-round " 
+      [routerLink]="['/financeiro/mensalidade-lista/',  aluno?._id]">Acessar mensalidades</button>
+  
+  </div> 
+</div>
+    </div>
+  
+  </div>
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h5>Mensalidades abertas: {{mensalidadeAberta?.length}}</h5>
+        </div>
+        <div *ngFor="let mensalidade of mensalidadeAberta">
+         
+          <div class="divider dropdown-divider"></div>
+          <div class="mensalidadesAbertas">
+         <a [routerLink]="['/mensalidade-detail', mensalidade._id]"  >
+           Data Venc. {{mensalidade?.vctmen  | date: 'dd/MM/yyyy' }} valor: R${{mensalidade?.vlrmen }}</a>
+        </div>
+        </div>
+        </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h5>Mensalidade(s) Paga(s): {{pagRight?.length}}</h5>
+        </div>
+        <div *ngFor="let mensalidade of pagRight">
+         
+          <div class="divider dropdown-divider"></div>
+          <div class="mensalidadePaga">  
+           Data Venc. {{mensalidade?.vctmen | date: 'dd/MM/yyyy'  }} Data Pag. {{mensalidade?.pgtomen | date: 'dd/MM/yyyy'}} valor: R${{mensalidade?.vlrmen }}
+           Obs: {{mensalidade?.obs}}
+           
+        </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+          <div class="card">
+         
+            <div class="card-header">
+              <h2 class="card-title"> Observações</h2>
+              <div class="criar-aluno">
+                <button class="btn btn-primary btn-round" 
+                [routerLink]="['/observacao/criar-observacao/',  aluno?._id]">Criar Observação</button>
+              </div>
+            </div>
+            <div class="card-body">  
+              <div class="#" *ngFor="let obs of observacoes">
+                <li class="list-group-item">{{obs?.message}}    
+                 <div class="buttonObs">
+                  <a (click)="openEditObs(obs)" ><i class='far fa-edit' style='font-size:24px'></i>
+                    </a>
+                  <a (click)="openDeleteObs(obs)" > <i class='fas fa-trash-alt' style='font-size:24px'></i></a>
+                </div><br/>
+                {{obs.createdAt | date: 'dd/MM/yyyy'}}
+                </li> 
+                
+                
+               
+              </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      <div class="col">
+        <div class="row">      
+          <modal #editObs>
+              <modal-header>
+                  <h1>{{obsSelecionado?.message}}   </h1>
+                  
+              </modal-header>
+              <modal-content>
+                <form [formGroup]="obsForm" (submit)="editObservacao()" >
+                <div class="md-form" >
+                  Mudar para:
+                  <textarea type="text" formControlName="message"  ></textarea>
+                </div>
+                <button class="btn btn-primary">Editar</button>
+              </form>
+              </modal-content>
+              <modal-footer>
+                  <button class="btn btn-primary" (click)="closeModal()">Fechar</button>
+              </modal-footer>
+          </modal>
+    
+          
+          <modal #deleteObs  >
+            <modal-header>
+              <h1>   </h1>
+          </modal-header>
+          <modal-content>
+            <p><strong>Tem certeza que deseja apagar a observação? <br/><br/>
+               <span class="text-primary"><h3>{{obsSelecionado?.message}}</h3></span> </strong></p>
+                   
+          </modal-content>
+          <modal-footer>        
+            <button type="button" (click)="deleteObservacao()" class="btn btn-danger" >Sim</button>
+        </modal-footer>
+           
+        </modal>
+        </div>
+      </div>
+    </div>
+    
+    
+        
+

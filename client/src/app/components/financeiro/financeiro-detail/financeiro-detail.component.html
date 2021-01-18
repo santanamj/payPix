@@ -1,0 +1,38 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="title">Cobrança: {{cobranca?.dados.loc.id}}</h3>
+              </div>
+        <div class="card-body">  
+        <div class="row">
+            <div class="col">
+               Valor: {{cobranca?.dados.valor?.original}} <br/>
+               Status da operação: {{cobranca?.dados.status}} <br/>
+               
+            </div>
+        </div>    
+  
+
+    
+      </div>
+      <div *ngIf="cobranca?.dados.status == 'ATIVA'" >
+<ngx-qrcode
+[elementType]="elementType"
+[errorCorrectionLevel]="correctionLevel"
+[value]="qrCode"
+cssClass="bshadow"></ngx-qrcode>
+</div>
+<div *ngIf="e2eId == '1'">
+  <button  name="button" (click)="Submit()"  class="btn btn-primary btn-round ">Devolver Cobrança</button>
+</div>
+<div *ngIf="devolucao == '0'">
+  Cobrança devolvida
+</div>
+</div>
+</div>
+</div>
+</div>
