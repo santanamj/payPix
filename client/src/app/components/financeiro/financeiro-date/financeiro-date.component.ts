@@ -28,10 +28,7 @@ export class FinanceiroDateComponent implements OnInit {
       dataInit:['', Validators.required],
       dataEnd: ['', Validators.required]
     })
-    this.financeiroService.getmensalidaMes().subscribe((data: any)=>{
-      this.financeiros = data;
-      
-    });
+    
    }
    submit(){
     const dateInit = this.dataForm.get('dataInit').value;
@@ -39,16 +36,10 @@ export class FinanceiroDateComponent implements OnInit {
     const dates = `dateInit=${dateInit}&dataEnd=${dateEnd}`
     this.buscaDate$.next(dates);
     this.financeiroService.searchData(this.buscaDate$).subscribe((data)=>{
-     this.financeirosData = data;
-     console.log(this.financeirosData.pix)
-     const ValorMen = this.financeirosData.map((item)=> {return item.valor});
+     this.financeirosData = data;     
+     const ValorMen = this.financeirosData.map((item)=> {return parseFloat(item.valor)});     
      
-     for(let i = 0; ValorMen.length > i; i++){
-      this.newValor.push(parseFloat(ValorMen[i].original)); 
-     
-      console.log(this.newValor)   
-     }
-     this.valorFinanceiro = this.newValor.reduce((total, numero) => total + numero, 0)
+     this.valorFinanceiro = ValorMen.reduce((total, numero) => total + numero, 0)
       console.log(this.valorFinanceiro)
     })
     
@@ -68,7 +59,7 @@ export class FinanceiroDateComponent implements OnInit {
      'elementHandlers': handleElement
    });
 
-   doc.save('Relatorio-mensal.pdf');
+   doc.save('Relatorio-cobranca.pdf');
  }
   ngOnInit(): void {
   }

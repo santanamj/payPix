@@ -21,19 +21,20 @@ import { FinanceiroService } from './../../services/financeiro.service';
 import { MensalidadesComponent } from './mensalidades/mensalidades.component';
 
 import { DadosFinancasComponent } from './dados-financas/dados-financas.component';
-import { MensalidaMesComponent } from './mensalida-mes/mensalida-mes.component';
-import { MensalidaMesDateComponent } from './mensalida-mes-date/mensalida-mes-date.component';
-import { MensalidaMesFalteComponent } from './mensalida-mes-falte/mensalida-mes-falte.component';
-import { MensalidaMesFalteDateComponent } from './mensalida-mes-falte-date/mensalida-mes-falte-date.component';
+
 
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { FinanceiroDetailComponent } from './financeiro-detail/financeiro-detail.component';
 import { FinanceiroDateComponent } from './financeiro-date/financeiro-date.component';
+import { PendentesComponent } from './pendentes/pendentes.component';
+import { FecharCaixaComponent } from './fechar-caixa/fechar-caixa.component';
+import { RelatorioDataComponent } from './relatorio-data/relatorio-data.component';
+import { RelatorioComponent } from './relatorio/relatorio.component';
 registerLocaleData(localePt);
 @NgModule({
     declarations: [   
       MensalidadesComponent,
-   DadosFinancasComponent, MensalidaMesComponent, MensalidaMesDateComponent, MensalidaMesFalteComponent, MensalidaMesFalteDateComponent, FinanceiroDetailComponent, FinanceiroDateComponent],
+   DadosFinancasComponent, FinanceiroDetailComponent, FinanceiroDateComponent, PendentesComponent, FecharCaixaComponent, RelatorioDataComponent, RelatorioComponent],
     imports: [
         CommonModule,
     RouterModule,

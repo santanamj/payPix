@@ -42,24 +42,26 @@ export class MensalidadesComponent implements OnInit {
   { 
     this.claimMoney = '0,00';  
     this.form = this.formBuild.group({
-      amount: [ this.formatMoney(this.claimMoney), Validators.required]    
+      amount: [ this.formatMoney(this.claimMoney), Validators.required],
+      nameClient: ['', Validators.required]    
   })  
     
   }
   formatMoney(value) {
-    const temp = `${value}`.replace(".", ",");
+    const temp = `${value}`.replace(",", ".");
     return temp;
 }
 transformTotal() {
   const value = this.form.controls.amount.value;
   this.form.controls.amount.setValue(
-    this.formatMoney(value.replace(/\,/g, ",")), 
+    this.formatMoney(value.replace(/\,/g, ".")), 
     {emitEvent: false}
   );
 }
 registroSubmit(){
   const mensalidade = {
-    valor: this.form.get('amount').value
+    valor: this.form.get('amount').value,
+    nameClient: this.form.get('nameClient').value
   }
   console.log(mensalidade)
   this.financeiroService.newMensalidade(mensalidade).subscribe((data: any)=>{

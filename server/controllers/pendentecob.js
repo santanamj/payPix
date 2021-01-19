@@ -54,7 +54,7 @@ const dateDay = moment(currentTime).format('YYYY-MM-DD');
 console.log(currentTime)
 const getPix = async ()=>{
     const auth = await getToken(); 
-    const url = `https://api-pix.gerencianet.com.br/v2/pix?inicio=2021-01-11T00:00:00.000Z&fim=2021-01-18T23:00:00.000Z&devolucaoPresente=false`;
+    const url = `https://api-pix.gerencianet.com.br/v2/cob/?inicio=${dateDay}T00:01:00Z&fim=${dateDay}T23:59:00Z&status=ATIVA`;
     let options = {
      method: 'GET',
      url: url,    
@@ -69,8 +69,8 @@ const getPix = async ()=>{
    
     return axios(options)
        .then((response)=> { 
-        console.log(response.data.pix)
-         return (response.data.pix)
+        console.log(response.data.cobs)
+         return (response.data.cobs)
        })
        .catch((err) =>{     
         console.log(err.response);

@@ -6,13 +6,10 @@
       
      <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Cobranças pagas do dia</h3>
+        <h3 class="card-title">Cobranças pendentes</h3>
         <div class="criar-cobranca">
           <button class="btn btn-primary btn-round" 
-          [routerLink]="['/financeiro/fecharcaixa']">Fechar caixa</button>
-          
-          <button class="btn btn-secundary btn-round" 
-          [routerLink]="['/financeiro/pendente']">Pendentes</button>
+          [routerLink]="['/financeiro/cobranca']">Fechar caixa</button>
           <button class="btn btn-secundary btn-round" 
           [routerLink]="['/financeiro/cobranca']">Criar cobrança</button>
         </div>
@@ -37,7 +34,7 @@
               </thead>
               <tbody *ngIf="cobrancas">
                 <tr *ngFor="let cobranca of cobrancas" [routerLink]="['/financeiro-detail/', cobranca?.txid]">
-                  <td  scope="row">{{cobranca.infoAdicionais[0].valor }}</td>
+                  <td  scope="row">{{cobranca.infoAdicionais[0].valor}}</td>
                   <td scope="row"  >{{cobranca.valor.original | currency:'BRL':true}}</td>
                  
                   <td>{{cobranca.calendario.criacao | date: 'dd/MM/yyyy h:m:ss a'}}</td>

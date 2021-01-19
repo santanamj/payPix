@@ -13,7 +13,7 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AlunoModule } from './components/alunos/aluno.module';
+
 import { FinanceiroModule } from './components/financeiro/financeiro.module';
 
 import { MatNativeDateModule, MatPseudoCheckboxModule } from '@angular/material/core';
@@ -32,7 +32,7 @@ import { AuthInterceptor } from './guards/authconfig.interceptor';
     RouterModule,
     AppRoutingModule,
     NgbModule,
-    AlunoModule,
+   
     FinanceiroModule,
     ObservacaoModule,
     MatFormFieldModule,

@@ -42,23 +42,19 @@
             <table class="table table-bordered">
                 <tr class="table-primary">
                   <th>Data de pagamento</th>
-                  <th>Tipo de pagamento</th>
                   <th>Valor</th>
-                  <th>Data de vencimento</th>
-                  <th>Observações</th>
+                 
               
                 </tr>
                 <tr *ngFor="let item of financeirosData">
-                  <th>{{item.pgtomen | date: 'dd/MM/yyyy'}}</th>
-                  <td>{{item.tipo}}</td>
-                  <td  >{{item.valor.original}}</td>
-                  <td>{{item.vctmen | date: 'dd/MM/yyyy'}}</td>
-                  <td> {{item.observacao}}</td>
+                  <th>{{item.horario | date: 'dd/MM/yyyy'}}</th>
+                  <td>{{item.valor}}</td>
+                 
                 
                 </tr>
                 <tr class="table-primary">                
                     <th>Totais</th>
-                    <th></th>
+                
                     <th>{{valorFinanceiro | currency:'BRL':true}}</th>
                     <!-- <th>{{cartaoValor | currency:'BRL':true}}</th>
                     <th>{{valoresOutro | currency:'BRL':true}}</th> -->

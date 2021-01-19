@@ -1,8 +1,11 @@
 const rp = require('request-promise-native');
 const Txid = require ('./../model/txid');
+const Caixa =  require ('./../model/caixa');
 const charge =  require ('./charge');
 const moment = require("moment");
 const getPix = require ('./allpix');
+const pendeteCob = require('./pendentecob');
+const getCob = require ('./allcob');
 const getToken = require ('./getToken');
 const PIXiD = require ('./onepix');
 const PixCancel = require ('./devolucao');
@@ -17,7 +20,7 @@ const newCert = new https.Agent({
   passphrase: ""
 });
 exports.gerarToken =  async (req,res,next) => {
-  console.log('valor', req.body.valor);
+  console.log('valor', req.body);
   const valor = req.body.valor;
   const client = req.body.nameClient;
     const tx = new Txid ({
@@ -32,17 +35,26 @@ exports.gerarToken =  async (req,res,next) => {
        }
       })
       console.log('tx', tx.numberTx)
-    const idOp = await tx.numberTx;     
+    const idOp = await tx.numberTx;   
+    nome = [{
+      "infoAdicionais": "Nome",
+      "valor": "MSantana"
+     }]  
     const dadospix = {
         "calendario": {
             "expiracao": 3600
           },
-         
+          "infoAdicionais": [
+            {
+              "nome": "client",
+              "valor": client
+            }
+          ],
           "valor": {
             "original": valor
           },
           "chave": "df68f73b-63eb-4f5b-b682-a9d4dc797dda",
-          "solicitacaoPagador": `${client} - ${tx}`
+          "solicitacaoPagador": 'Serviço de desenvolvimento de software'
     }  
 
   const dadosCobranca = JSON.stringify(dadospix);   
@@ -61,20 +73,61 @@ exports.gerarToken =  async (req,res,next) => {
     res.json(dataPix)
 }
 exports.getAllPix = async (req, res )=>{
-  const allPix = await getPix();
-  console.log('allPix', allPix);
-  const dataPix = {
-    dados: allPix
-  }
+ // const allPix = await getPix();
+  const allCob = await getCob(); 
   try {
-    res.json(allPix);
+    res.json({ cob: allCob});
   } catch(e) {
     console.log('error:', e.message);
   } 
 }
+exports.getPendenteCob = async (req, res )=>{  
+  const allCob = await pendeteCob();
+  try {
+    res.json({cob: allCob});
+  } catch(e) {
+    console.log('error:', e.message);
+  } 
+}
+exports.fecharCaixa = async (req, res)=>{
+  const allCob = await getPix();
+  try {
+    res.json({pix: allCob});
+  } catch(e) {
+    console.log('error:', e.message);
+  } 
+}
+exports.closeCaixa = (req, res)=>{
+  const caixa  = new Caixa({
+    valor: req.body.valor
+  })
+  caixa.save((err, caixa)=>{
+    if(err){
+      res.json({success: false})
+    }else{
+      console.log(caixa)
+      res.json({success: true})
+    }
+  })
+}
+exports.getCaixas = (req, res)=>{
+  Caixa.find({}, (err, caixas)=>{
+   res.json(caixas)
+  })
+}
+exports.searchgetCaixasDate = (req, res, next)=>{    
+  
+  const datasB = JSON.parse(req.query.buscaDate); 
+  
+  console.log('data', datasB)
+  Caixa.find({'createdAt':{$in:datasB}}, (err, caixas)=>{
+      console.log(caixas)
+      res.json(caixas)
+  }).limit(35)
+}
 const PixDate = async (token, init, end)=>{
   // /const url = `https://api-pix.gerencianet.com.br/v2/pix/?inicio=${init}&fim=${end}&devolucaoPresente=false`;
-  const url = `https://api-pix.gerencianet.com.br/v2/cob/?inicio=${init}T00:00:00Z&fim=${end}T23:59:59Z`;
+  const url = `https://api-pix.gerencianet.com.br/v2/pix?inicio=${init}T00:00:00Z&fim=${end}T23:59:59Z&devolucaoPresente=false`;
   let options = {
    method: 'GET',
    url: url,    
@@ -87,8 +140,8 @@ const PixDate = async (token, init, end)=>{
  } 
   return axios(options)
      .then((response)=> { 
-      console.log(response.data.cobs)
-       return (response.data.cobs)
+      console.log(response.data.pix)
+       return (response.data.pix)
      })
      .catch((err) =>{     
       console.log(err.response);
@@ -138,8 +191,6 @@ exports.cancelarCobranca = async(req, res)=>{
   const valor = {
     valor: req.body.valor
   }
-  const Cancel =  await PixCancel(dadostx2id, id, valor);
-  
+  const Cancel =  await PixCancel(dadostx2id, id, valor);  
   res.json(Cancel)
-
 }

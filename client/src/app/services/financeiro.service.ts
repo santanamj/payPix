@@ -28,9 +28,15 @@ export class FinanceiroService {
   ) { }
   getCobrancas(){
     return this.http.get(this.domain + 'api/getAllPix')
+  } 
+  getPendenteCob(){
+    return this.http.get(this.domain + 'api/getPendenteCob')
   }
   getCobrancaId(id)  {
     return this.http.get(this.domain + 'api/getCobrancaId/'+ id)
+  }
+  fecharCaixa(){
+    return this.http.get(this.domain + 'api/fecharCaixa');
   }
   devolverCobranca(dados){
     return this.http.put(this.domain + 'api/cancelarCobranca', dados)
@@ -38,6 +44,9 @@ export class FinanceiroService {
   newMensalidade(financeiro) {
     // Create headers
    return this.http.post(this.domain + 'api/gerarToken', financeiro)
+ }
+ closeCaixa(caixa){
+  return this.http.post(this.domain + 'api/closeCaixa', caixa)
  }
  getSingleAluno(id) {
   // Create headers
@@ -51,18 +60,17 @@ export class FinanceiroService {
   // Create headers
  return this.http.get(this.domain + 'api/oneAlunoMensalidadeList/' + id)
 }
- //oneAlunoMensalidadeList
- getMensalidadeId(id) {
-  // Create headers
- return this.http.get(this.domain + 'api/oneMensalidade/' + id)
+getCaixas(){
+  return this.http.get(this.domain + 'api/getCaixas');
 }
-getmensalidaMes() {
-  // Create headers
- return this.http.get(this.domain + 'api/mensalidaMes')
+searchCaixa(buscarDates: Observable<string>) {
+  return buscarDates.debounceTime(400)
+    .distinctUntilChanged()
+    .switchMap(buscarCredito => this.buscaDateCaixa(buscarCredito));
 }
-getmensalidaMesFalte() {
+buscaDateCaixa(buscarCredito:any) {
   // Create headers
- return this.http.get(this.domain + 'api/mensalidaMesFalte')
+ return this.http.get(this.domain + 'api/searchgetCaixasDate' + this.queryUrl + buscarCredito)
 }
 
 searchData(buscarDates: Observable<string>) {

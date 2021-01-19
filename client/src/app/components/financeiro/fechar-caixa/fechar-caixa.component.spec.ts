@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MensalidaMesFalteComponent } from './mensalida-mes-falte.component';
+import { FecharCaixaComponent } from './fechar-caixa.component';
 
-describe('MensalidaMesFalteComponent', () => {
-  let component: MensalidaMesFalteComponent;
-  let fixture: ComponentFixture<MensalidaMesFalteComponent>;
+describe('FecharCaixaComponent', () => {
+  let component: FecharCaixaComponent;
+  let fixture: ComponentFixture<FecharCaixaComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MensalidaMesFalteComponent ]
+      declarations: [ FecharCaixaComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MensalidaMesFalteComponent);
+    fixture = TestBed.createComponent(FecharCaixaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,59 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+<div class="row">   
+    <div class="col-md-12">
+      <div class="card ">
+        <div class="card-header ">
+          <h5 class="card-title">Buscar fechamento por data</h5>          
+        </div>
+        <div class="card-body " >
+        
+            <form [formGroup]="dataForm" (submit)="submit()">
+                <mdb-card-body class="visita">                  
+                  <div class="divider dropdown-divider"></div>
+                <div formArrayName="dataCaixas" *ngFor="let order of dataForm.controls.dataCaixas.controls; let i = index">
+              
+                  <input type="checkbox" (change)="changed($event)" [formControlName]="i" ngDefaultControl [default]="true" for="dataTituloBoleto">{{listCaixa[i]?.createdAt | date: 'dd/MM/yyyy'}}
+                 /  {{listCaixa[i]?.valor | currency:'BRL':true}}
+                </div>
+                </mdb-card-body>
+                <button  color="primary" (click)="submit()" name="button" class="btn btn-outline-secundary">Listar boleto</button>
+              </form>        
+    </div>  
+</div> 
+<div id="htmlData" #htmlData > 
+    <div class="print">
+    <h5 class="card-title">Buscar fechamento por data</h5>    
+    <div class="list-group printData">
+    
+
+
+        <table class="table table-bordered">
+            <tr class="table-primary">
+              <th>Data</th>
+              <th>Valor</th>
+            
+          
+            </tr>
+            <tr *ngFor="let item of relatorio">
+              <th>{{item.createdAt | date: 'dd/MM/yyyy'}}</th>
+              <td>{{item.valor | currency:'BRL':true}}</td>
+             
+            
+            </tr>
+            <tr class="table-primary">                
+                <th>Totais</th>
+                <th>{{totalValor | currency:'BRL':true}}</th>
+                
+               
+              </tr>
+          </table>
+
+    </div>
+</div> 
+</div>
+<button class="btn btn-danger btn-block" (click)="downloadPDF()">Download PDF</button>
+ 
+</div>
+</div>

@@ -2,27 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { FinanceiroService } from '../../../services/financeiro.service';
-
 @Component({
-  selector: 'app-dados-financas',
-  templateUrl: './dados-financas.component.html',
-  styleUrls: ['./dados-financas.component.css']
+  selector: 'app-pendentes',
+  templateUrl: './pendentes.component.html',
+  styleUrls: ['./pendentes.component.css']
 })
-export class DadosFinancasComponent implements OnInit {
-  mensalidades;
-  faltaMensalidades;
-  valorMensalidade;
-  valorMensalidadeFalte;
+export class PendentesComponent implements OnInit { 
   data;
   user;
   gestor;
-  cobrancas;
-  
+  cobrancas; 
   constructor(
     private financeiroService: FinanceiroService,
     private authService: AuthService,
     private router: Router
-  ) { 
+  ) {
     this.authService.getProfile().subscribe((data: any) => {
       if(data.success ==false){       
        this.router.navigate(['/login']);
@@ -30,13 +24,11 @@ export class DadosFinancasComponent implements OnInit {
       this.user = data;    
       this.gestor = this.user.user.role;      
     }) 
-    this.financeiroService.getCobrancas().subscribe((data: any)=>{
-     
+    this.financeiroService.getPendenteCob().subscribe((data: any)=>{
       this.cobrancas = data.cob;
       console.log(this.cobrancas)
     });
-    
-  }
+   }
 
   ngOnInit(): void {
   }

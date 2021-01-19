@@ -61,7 +61,7 @@ const charge = async (dadosCobranca, idOp, req, res, next  )=>{
   httpsAgent: newCert,
   data: dadosCobranca  
 }  
-
+console.log(options)
  return axios(options)
     .then((response)=> { 
       console.log(response.data)

@@ -1,0 +1,19 @@
+.btn.btn-icon.btn-simple, .navbar .navbar-nav > a.btn.btn-icon.btn-simple{
+    float: right;
+    margin: 10px;
+}
+.card-title{
+    width: 200px;
+    display: inline-block;
+}
+.criar-cobranca{
+    float: right;
+}
+table.table td {
+    padding-top: 1.1rem;
+    padding-bottom: 1rem;
+    cursor: pointer;
+}
+.mat-datepicker-toggle{
+    color: black !important;
+  }
