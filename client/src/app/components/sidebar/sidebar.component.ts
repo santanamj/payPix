@@ -35,10 +35,10 @@ export class SidebarComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
-    this.clickEventsubscription=    this.authService.getClickEvent().subscribe(()=>{
-    
+    this.clickEventsubscription = this.authService.getClickEvent().subscribe(()=>{
+      this.getNew();
       })
-    
+      this.getNew();
    }
    getNew(){
     this.authService.getProfile().subscribe((data: any) => {

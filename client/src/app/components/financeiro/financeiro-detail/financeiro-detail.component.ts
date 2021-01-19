@@ -35,7 +35,7 @@ export class FinanceiroDetailComponent implements OnInit {
       this.cobranca = response;  
       this.qrCode = this.cobranca.qrcode;
       console.log(this.cobranca.dados)
-      if(this.cobranca.dados.pix && this.cobranca.dados.pix[0].devolucoes[0]){        
+      if(this.cobranca.dados.pix[0] && this.cobranca.dados.pix[0].devolucoes){        
         this.devolucao = '0';
       }else if(this.cobranca.dados.pix){
         this.e2eId = '1';

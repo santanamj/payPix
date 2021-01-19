@@ -1,14 +1,20 @@
 <div class="panel-header panel-header-sm">
 </div>
 <div class="main-content">
-    <div class="row">   
+  <div  class="row" *ngIf="role !== 'gerente'">
+    <div class="card">
+      <div class="card-body">     
+    Usuário não autorizado para acessar as informações, acesse como gerente.
+    </div>    
+  </div>
+</div>
+    <div class="row" *ngIf="role === 'gerente'">   
         <div class="col-md-12">
           <div class="card ">
             <div class="card-header ">
               <h2 class="card-title">Relatório por data</h2>          
             </div>
-            <div class="card-body " >
-        
+            <div class="card-body">        
                 <form [formGroup]="dataForm" (submit)="submit()">
                  <div class="row">
                     <div class="col-md-4">  
@@ -30,22 +36,17 @@
                  </div>
                     <button [disabled]="!dataForm.valid" color="primary" (click)="submit()" class="btn btn-outline-secundary">Carregar relatório</button>
                   </form>        
-        </div>  
-    </div> 
+        </div>       
+    </div>    
     <div id="htmlData" #htmlData > 
         <div class="print">
         <h2 class="card-title">Relatório por data</h2>    
         <div class="list-group printData">
-        
-    
-    
-            <table class="table table-bordered">
+         <table class="table table-bordered">
                 <tr class="table-primary">
                   <th>Data de pagamento</th>
-                  <th>Valor</th>
-                 
-              
-                </tr>
+                  <th>Valor</th>           
+              </tr>
                 <tr *ngFor="let item of financeirosData">
                   <th>{{item.horario | date: 'dd/MM/yyyy'}}</th>
                   <td>{{item.valor}}</td>
@@ -58,7 +59,7 @@
                     <th>{{valorFinanceiro | currency:'BRL':true}}</th>
                     <!-- <th>{{cartaoValor | currency:'BRL':true}}</th>
                     <th>{{valoresOutro | currency:'BRL':true}}</th> -->
-                  
+                      
                   </tr>
               </table>
     
@@ -66,6 +67,10 @@
     </div> 
     </div>
     <button class="btn btn-danger btn-block" (click)="downloadPDF()">Download PDF</button>
-     
+  </div>
+  
+<div>
+   
+
     </div>
-</div>
+

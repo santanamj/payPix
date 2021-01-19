@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { FinanceiroService } from '../../../services/financeiro.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-dados-financas',
   templateUrl: './dados-financas.component.html',
@@ -16,8 +16,8 @@ export class DadosFinancasComponent implements OnInit {
   data;
   user;
   gestor;
-  cobrancas;
-  
+  cobrancas: any[] = [];
+  datas;
   constructor(
     private financeiroService: FinanceiroService,
     private authService: AuthService,
@@ -30,10 +30,11 @@ export class DadosFinancasComponent implements OnInit {
       this.user = data;    
       this.gestor = this.user.user.role;      
     }) 
-    this.financeiroService.getCobrancas().subscribe((data: any)=>{
-     
+    this.financeiroService.getCobrancas().subscribe((data: any)=>{     
       this.cobrancas = data.cob;
-      console.log(this.cobrancas)
+      this.datas = this.cobrancas.map((item)=>{ return moment(item.pix.horario).format('YYYY-MM-DD')});
+      console.log(this.datas)
+
     });
     
   }

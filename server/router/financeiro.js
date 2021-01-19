@@ -4,13 +4,13 @@ express = require ('express');
 
 var api = express.Router();
 api.post('/gerarToken', financeiroController.gerarToken);
-api.post('/closeCaixa', financeiroController.closeCaixa);
-api.get('/getAllPix', financeiroController.getAllPix);
-api.get('/getPendenteCob', financeiroController.getPendenteCob);
-api.get('/fecharCaixa', financeiroController.fecharCaixa);
-api.get('/getpixdate', financeiroController.getpixdate);
+api.post('/closeCaixa', AuthenticationControler.use, financeiroController.closeCaixa);
+api.get('/getAllPix', AuthenticationControler.use, financeiroController.getAllPix);
+api.get('/getPendenteCob', AuthenticationControler.use, financeiroController.getPendenteCob);
+api.get('/fecharCaixa', AuthenticationControler.use, financeiroController.fecharCaixa);
+api.get('/getpixdate', AuthenticationControler.use, financeiroController.getpixdate);
 api.get('/getCobrancaId/:id', financeiroController.getCobrancaId);
-api.get('/getCaixas', financeiroController.getCaixas);
-api.get('/searchgetCaixasDate', financeiroController.searchgetCaixasDate)
+api.get('/getCaixas', AuthenticationControler.use, financeiroController.getCaixas);
+api.get('/searchgetCaixasDate', AuthenticationControler.use, financeiroController.searchgetCaixasDate)
 api.put('/cancelarCobranca', financeiroController.cancelarCobranca);
 module.exports = api;

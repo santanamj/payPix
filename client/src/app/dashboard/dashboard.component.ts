@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as Chartist from 'chartist';
 import { AlunosService } from '../services/alunos.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,11 +11,18 @@ import { AlunosService } from '../services/alunos.service';
 })
 export class DashboardComponent implements OnInit {
   alunos;
+  user;
   constructor(
-    private alunoService: AlunosService
+    private alunoService: AlunosService,
+    private authService: AuthService,
+    private router: Router
   ) { 
-    this.alunoService.getNuAlunos().subscribe((data: any)=>{
-      this.alunos = data;
+    this.authService.getProfile().subscribe((data: any) => {
+      if (data.success == false) {
+        this.router.navigate(['/login']);
+      }
+      this.user = data;
+      console.log(this.user.user.username)
     })
   }
 

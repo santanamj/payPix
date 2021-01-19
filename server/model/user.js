@@ -99,8 +99,8 @@ const userSchema = new Schema({
   
   role: {
     type: String,
-    enum: ['cozinha', 'atendimento', 'gerente', 'adm', 'cliente'],
-    default: 'atendimento'
+    enum: ['caixa', 'atendimento', 'gerente', 'adm', 'cliente'],
+    default: 'caixa'
 }
 });
 

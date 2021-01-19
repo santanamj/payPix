@@ -16,22 +16,22 @@
             </div>
         </div>    
   
-
-    
+        <div *ngIf="cobranca?.dados.status == 'ATIVA'" >
+          <ngx-qrcode
+          [elementType]="elementType"
+          [errorCorrectionLevel]="correctionLevel"
+          [value]="qrCode"
+          cssClass="bshadow"></ngx-qrcode>
+          </div>
+          <div *ngIf="e2eId == '1'">
+            <button  name="button" (click)="Submit()"  class="btn btn-danger btn-round ">Devolver Cobrança</button>
+          </div>
+          <div *ngIf="devolucao == '0'">
+            Cobrança devolvida
+          </div>
+          <button  name="button" [routerLink]="['/financeiro/financas']"  class="btn btn-primary btn-round ">voltar</button>
       </div>
-      <div *ngIf="cobranca?.dados.status == 'ATIVA'" >
-<ngx-qrcode
-[elementType]="elementType"
-[errorCorrectionLevel]="correctionLevel"
-[value]="qrCode"
-cssClass="bshadow"></ngx-qrcode>
-</div>
-<div *ngIf="e2eId == '1'">
-  <button  name="button" (click)="Submit()"  class="btn btn-primary btn-round ">Devolver Cobrança</button>
-</div>
-<div *ngIf="devolucao == '0'">
-  Cobrança devolvida
-</div>
+     
 </div>
 </div>
 </div>

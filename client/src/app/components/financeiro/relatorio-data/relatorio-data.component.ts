@@ -2,6 +2,9 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FinanceiroService } from '../../../services/financeiro.service';
 import { FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 declare var jsPDF: any;
 @Component({
   selector: 'app-relatorio-data',
@@ -20,20 +23,43 @@ export class RelatorioDataComponent implements OnInit {
   totalValor;
   cartaoValor;
   valoresOutro;
+  message;
+  user;
+  gerente;
+  role;
   constructor(
+    private authService: AuthService,
     private financeiroService: FinanceiroService,
-    private formBuild: FormBuilder
+    private formBuild: FormBuilder,
+    private router: Router,
+    private toastr: ToastrService
   ) {
+    this.authService.getProfile().subscribe((data: any) => {
+      if(data.success ==false){       
+       this.router.navigate(['/login']);
+      }
+      this.user = data;    
+      this.role = this.user.user.role;  
+      console.log(this.role)    
+    }) 
     this.dataForm = this.formBuild.group({
       dataCaixas: new FormArray([])     
      })  
     this.financeiroService.getCaixas().subscribe((data: any)=>{
+      if(data.message == "Usuário não autorizado"){
+        this.message = "Usuário não autorizado";
+        this.toastr.error('Usuário não autorizado para acessar a informação', 'false', {
+          timeOut: 5000
+        });
+       }else{
       this.listCaixa = data;
       console.log(this.listCaixa)
       this.listCaixa.forEach(() => {
         const control = new FormControl(); // if first item set to true, else false
         (this.dataForm.controls.dataCaixas as FormArray).push(control);
+        
       });  
+    }
     })
     this.submit();
    }
@@ -49,10 +75,16 @@ export class RelatorioDataComponent implements OnInit {
     this.buscaDate = `buscaDate=${selectData}`;
     this.buscaDate$.next(this.buscaDate);
     this.financeiroService.searchCaixa(this.buscaDate$).subscribe((data: any) => {
+      if(data.message == "Usuário não autorizado"){
+        this.message = "Usuário não autorizado";
+        this.toastr.error('Usuário não autorizado para acessar a informação', 'false', {
+          timeOut: 10000
+        });
+       }else{
       this.relatorio = data;
       this.totalValor = this.relatorio.map((item) => item.valor)
       .reduce((previous, current) => previous + current, 0);
-     
+       }
     })
    }
    public downloadPDF():void {

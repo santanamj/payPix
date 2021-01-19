@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   ) { 
     this.authService.getProfile().subscribe((data: any) => {
       if(data.success ==true){
-       console.log('user não logado')
+       console.log(data.success)
        this.router.navigate(['/dashboard']);
       }
      

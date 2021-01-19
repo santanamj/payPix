@@ -1,7 +1,14 @@
 <div class="panel-header panel-header-sm">
 </div>
 <div class="main-content">
-<div class="row">   
+  <div  class="row" *ngIf="role !== 'gerente'">
+    <div class="card">
+      <div class="card-body">     
+    Usuário não autorizado para acessar as informações, acesse como gerente.
+    </div>    
+  </div>
+</div>
+<div class="row" *ngIf="role === 'gerente'">   
     <div class="col-md-12">
       <div class="card ">
         <div class="card-header ">
@@ -18,7 +25,7 @@
                  /  {{listCaixa[i]?.valor | currency:'BRL':true}}
                 </div>
                 </mdb-card-body>
-                <button  color="primary" (click)="submit()" name="button" class="btn btn-outline-secundary">Listar boleto</button>
+              
               </form>        
     </div>  
 </div> 
